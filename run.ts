@@ -1,9 +1,10 @@
 
-const { join } = require("path")
+import { join } from "path"
 import { graphql } from "@octokit/graphql"
 import * as playwright from 'playwright'
 import { existsSync } from "fs"
 import { execSync } from "child_process"
+import * as gm from "gm"
 
 (async () => {
 
@@ -74,10 +75,8 @@ import { execSync } from "child_process"
     execSync(`mkdir ${gistToken}`)
   }
 
-  const Gm = require("gm")
-  Gm()
-  .in("images/*.png")
-  .delay(400)
+  gm("images/*.png")
+  .delay(200)
   .resize(378, 100)
   .write(`${gistToken}/main.gif`, async function(err){
     if (err) throw err;
