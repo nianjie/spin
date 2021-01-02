@@ -65,16 +65,14 @@ import { execSync } from "child_process"
         await browser.close()
       }
     }
-    console.log("made screenshots")
-    await browser.close();
 
+  console.log("made screenshots")
+  await browser.close();
   const gistToken = "032161472173202c27337763fe1d9d56"
 
-  if (existsSync(gistToken)) {
-    execSync(`rm -rf ${gistToken}`)
+  if (!existsSync(gistToken)) {
+    execSync(`mkdir ${gistToken}`)
   }
-  execSync(`git clone https://nianjie:${process.env.GITHUB_API_TOKEN}@gist.github.com/${gistToken}.git`)
-  execSync(`rm ${gistToken}/*`)
 
   const Gm = require("gm")
   Gm()
@@ -83,12 +81,8 @@ import { execSync } from "child_process"
   .resize(378, 100)
   .write(`${gistToken}/main.gif`, async function(err){
     if (err) throw err;
-    console.log("animated.gif created")
-    const execOptions = { cwd: `${gistToken}`}
-    execSync("git add .", execOptions)
-    execSync("git commit -m 'update'", execOptions)
-    execSync("git push", execOptions)
-    
+    console.log("main.gif created")
+
     console.log("done")
   })
 })();

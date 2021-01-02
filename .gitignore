@@ -4,3 +4,4 @@ cache
 images/*.png
 images/*.gif
 .DS_Store
+.env

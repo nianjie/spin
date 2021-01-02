@@ -1,11 +1,12 @@
 {
   "license": "",
   "scripts": {
-    "run": "ts-node run.ts"
+    "run": "ts-node -r dotenv/config run.ts"
   },
   "dependencies": {
     "@octokit/graphql": "^4.5.8",
     "@types/node": "^14.14.19",
+    "dotenv": "^8.2.0",
     "gm": "^1.23.1",
     "playwright": "^1.7.1",
     "ts-node": "^9.1.1",
