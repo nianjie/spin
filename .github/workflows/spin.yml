@@ -1,11 +1,7 @@
-name: Update nightly
-
-# For testing
-# on: push
+name: spin CI
 
 on:
   schedule:
-    - cron: "0 4 * * *"
 
 jobs:
   run:
@@ -16,13 +12,10 @@ jobs:
       - uses: actions/setup-node@v1
       - run: sudo apt-get install graphicsmagick
       - run: |
-          git config --global user.email "4769034+nianjie@users.noreply.github.com "
+          git config --global user.email "4769034+nianjie@users.noreply.github.com"
           git config --global user.name "nj"
 
-      - run: yarn install
-      - run: yarn ts-node run.ts
+      - run: npm install
+      - run: npm run ts-node -r dotenv/config run.ts
         env:
           GITHUB_API_TOKEN: ${{ secrets.GIST_GITHUB_API_TOKEN }}
-
-
-

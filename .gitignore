@@ -5,3 +5,4 @@ images/*.png
 images/*.gif
 .DS_Store
 .env
+.vscode
