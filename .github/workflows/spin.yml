@@ -6,13 +6,13 @@ jobs:
   take-screenshot:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - uses: actions/setup-node@v2.1.4
       - run: sudo apt-get install graphicsmagick
       - run: |
           git config --global user.email "4769034+nianjie@users.noreply.github.com"
           git config --global user.name "nj"
       - run: npm ci
-      - run: npm run ts-node -r dotenv/config run.ts
+      - run: npm run
         env:
           GITHUB_API_TOKEN: ${{ secrets.GIST_GITHUB_API_TOKEN }}
