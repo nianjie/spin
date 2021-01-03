@@ -1,21 +1,18 @@
 name: spin CI
 
-on:
-  schedule:
+on: push
 
 jobs:
-  run:
+  take-screenshot:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.4
       - run: sudo apt-get install graphicsmagick
       - run: |
           git config --global user.email "4769034+nianjie@users.noreply.github.com"
           git config --global user.name "nj"
-
-      - run: npm install
+      - run: npm ci
       - run: npm run ts-node -r dotenv/config run.ts
         env:
           GITHUB_API_TOKEN: ${{ secrets.GIST_GITHUB_API_TOKEN }}
