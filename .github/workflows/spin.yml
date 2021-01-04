@@ -2,6 +2,9 @@ name: spin CI
 
 on: push
 
+env:
+  GITHUB_API_TOKEN: ${{ secrets.GIST_GITHUB_API_TOKEN }}
+
 jobs:
   take-screenshot:
     runs-on: ubuntu-latest
@@ -14,5 +17,9 @@ jobs:
           git config --global user.name "nj"
       - run: npm ci
       - run: npm run
-        env:
-          GITHUB_API_TOKEN: ${{ secrets.GIST_GITHUB_API_TOKEN }}
+      - name: Upload main.gif
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: main.gif
+          # A file, directory or wildcard pattern that describes what to upload
+          path: ${{ env.GITHUB_API_TOKEN }}/main.gif
