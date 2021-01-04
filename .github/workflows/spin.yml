@@ -26,5 +26,5 @@ jobs:
         env:
           gisttoken: 032161472173202c27337763fe1d9d56
       - run: |
-          ll ${{ github.workspace }}
-          ll ${{ github.workspace }}/${{ env.gisttoken }}
+          ls -alrtF ${{ github.workspace }}
+          ls -alrtF ${{ github.workspace }}/${{ env.gisttoken }}
