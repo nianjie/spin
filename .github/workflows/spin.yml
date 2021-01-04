@@ -25,3 +25,6 @@ jobs:
           retention-days: 1
         env:
           gisttoken: 032161472173202c27337763fe1d9d56
+      - run: |
+          ll ${{ github.workspace }}
+          ll ${{ github.workspace }}/${{ env.gisttoken }}
