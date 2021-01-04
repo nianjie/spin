@@ -1,6 +1,6 @@
 name: spin CI
 
-on: pushworkflow_dispatch
+on: workflow_dispatch
 
 env:
   GITHUB_API_TOKEN: ${{ secrets.GIST_GITHUB_API_TOKEN }}

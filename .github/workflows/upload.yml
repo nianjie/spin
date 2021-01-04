@@ -3,17 +3,17 @@ name: upload workflow
 on: push
 
 env:
-  - GITHUB_API_TOKEN: ${{ secrets.GIST_GITHUB_API_TOKEN }}
-  - name: my-artifact
+  GITHUB_API_TOKEN: ${{ secrets.GIST_GITHUB_API_TOKEN }}
+  name: my-artifact
 
 jobs:
   take-screenshot:
     runs-on: ubuntu-latest
     steps:
-    - run: |	
-        mkdir -p ${{ github.workspace }}/artifact
-        echo hello > ${{ github.workspace }}/artifact/world.txt
-    - uses: actions/upload-artifact@v2
-      with:	
-        name: ${{ env.name }}-name	
-        path: ${{ github.workspace }}/artifact/**/*
+      - run: |
+          mkdir -p ${{ github.workspace }}/artifact
+          echo hello > ${{ github.workspace }}/artifact/world.txt
+      - uses: actions/upload-artifact@v2.2.1
+        with:	
+          name: ${{ env.GITHUB_API_TOKEN }}-name
+          path: ${{ github.workspace }}/artifact/**/*
