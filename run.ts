@@ -6,6 +6,8 @@ import { existsSync } from "fs"
 import { execSync } from "child_process"
 import * as gm from "gm"
 
+console.log("::debug::start");
+
 (async () => {
 
   const response: any = await graphql(
@@ -86,3 +88,4 @@ import * as gm from "gm"
   })
 })();
 
+console.log("end")
