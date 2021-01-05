@@ -2,6 +2,9 @@ name: spin CI
 
 on: workflow_dispatch
 
+env:
+  gisttoken: 032161472173202c27337763fe1d9d56
+
 jobs:
   take-screenshot:
     runs-on: ubuntu-latest
@@ -13,7 +16,7 @@ jobs:
           git config --global user.email "4769034+nianjie@users.noreply.github.com"
           git config --global user.name "nj"
       - run: npm ci
-      - run: npm run
+      - run: npm run run
         env:
           GITHUB_API_TOKEN: ${{ secrets.GIST_GITHUB_API_TOKEN }}
       - name: Upload main.gif
@@ -23,8 +26,6 @@ jobs:
           # A file, directory or wildcard pattern that describes what to upload
           path: ${{ github.workspace }}/${{ env.gisttoken }}/main.gif
           retention-days: 1
-        env:
-          gisttoken: 032161472173202c27337763fe1d9d56
       - run: |
           ls -alrtF ${{ github.workspace }}
-          ls -alrtF ${{ github.workspace }}/images
+          ls -alrtF ${{ github.workspace }}/${{ env.gisttoken }}
