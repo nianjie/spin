@@ -5,8 +5,7 @@ import * as playwright from 'playwright'
 import { existsSync } from "fs"
 import { execSync } from "child_process"
 import * as gm from "gm"
-
-console.log("::debug::start");
+import { exit } from "process"
 
 (async () => {
 
@@ -71,11 +70,17 @@ console.log("::debug::start");
 
   console.log("made screenshots")
   await browser.close();
-  const gistToken = "032161472173202c27337763fe1d9d56"
 
-  if (!existsSync(gistToken)) {
-    execSync(`mkdir ${gistToken}`)
+  const gistToken = process.env.gist
+  if (!gistToken) {
+    console.error('error::Environment var[gist] is not setup.')
+    exit(1)
   }
+
+  if (existsSync(gistToken)) {
+    execSync(`rm -rf ${gistToken}`)
+  }
+  execSync(`git clone https://${response.viewer.login}:${process.env.GITHUB_API_TOKEN}@gist.github.com/${gistToken}.git`)
 
   gm("images/*.png")
   .delay(200)
@@ -83,9 +88,9 @@ console.log("::debug::start");
   .write(`${gistToken}/main.gif`, async function(err){
     if (err) throw err;
     console.log("main.gif created")
-
+    execSync(`git add .`, { cwd: gistToken })
+    execSync(`git commit -m 'update'`, { cwd: gistToken })
+    execSync(`git push`, { cwd: gistToken })
     console.log("done")
   })
 })();
-
-console.log("end")
