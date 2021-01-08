@@ -4,6 +4,7 @@ on: workflow_dispatch
 
 env:
   gist: 032161472173202c27337763fe1d9d56
+  gist_file_name: main.gif
 
 jobs:
   take-screenshot:

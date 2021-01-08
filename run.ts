@@ -71,26 +71,38 @@ import { exit } from "process"
   console.log("made screenshots")
   await browser.close();
 
-  const gistToken = process.env.gist
-  if (!gistToken) {
-    console.error('error::Environment var[gist] is not setup.')
-    exit(1)
+  let check = true
+  const gistProps = {
+    name: process.env.gist,
+    filename: process.env.gist_file_name
+  }
+  for (const key in gistProps) {
+    if (Object.prototype.hasOwnProperty.call(gistProps, key)) {
+      const val = gistProps[key];
+      if (!val) {
+        console.error(`error::Environment variable[${key}] is not setup.`)
+        check = false
+      }
+    }
+  }
+  if (!check) {
+    exit(1)    
   }
 
-  if (existsSync(gistToken)) {
-    execSync(`rm -rf ${gistToken}`)
+  if (existsSync(gistProps.name)) {
+    execSync(`rm -rf ${gistProps.name}`)
   }
-  execSync(`git clone https://${response.viewer.login}:${process.env.GITHUB_API_TOKEN}@gist.github.com/${gistToken}.git`)
+  execSync(`git clone https://${response.viewer.login}:${process.env.GITHUB_API_TOKEN}@gist.github.com/${gistProps.name}.git`)
 
   gm("images/*.png")
   .delay(200)
   .resize(378, 100)
-  .write(`${gistToken}/main.gif`, async function(err){
+  .write(`${gistProps.name}/${gistProps.filename}`, async function(err){
     if (err) throw err;
-    console.log("main.gif created")
-    execSync(`git add .`, { cwd: gistToken })
-    execSync(`git commit -m 'update'`, { cwd: gistToken })
-    execSync(`git push`, { cwd: gistToken })
+    console.log(`${gistProps.filename} created`)
+    execSync(`git add .`, { cwd: gistProps.name })
+    execSync(`git commit -m 'update'`, { cwd: gistProps.name })
+    execSync(`git push`, { cwd: gistProps.name })
     console.log("done")
   })
 })();
