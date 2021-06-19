@@ -1,0 +1,14 @@
+name: update WOTD
+
+on:
+  schedule:
+    - cron:  '30 9,10,11 * * *'
+
+env:
+  api_address: 'https://oxfordwotd.herokuapp.com/wotd/'
+
+jobs:
+  take-screenshot:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl "${{ env.api_address }}"
