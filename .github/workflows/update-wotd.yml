@@ -1,6 +1,6 @@
 name: update WOTD
 
-on:
+on: workflow_dispatch
   schedule:
     - cron:  '30 9,10,11 * * *'
 
