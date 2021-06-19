@@ -1,8 +1,6 @@
 name: update WOTD
 
 on: workflow_dispatch
-  schedule:
-    - cron:  '30 9,10,11 * * *'
 
 env:
   api_address: 'https://oxfordwotd.herokuapp.com/wotd/'
