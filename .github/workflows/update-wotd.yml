@@ -1,4 +1,4 @@
-name: 'update WOTD at 0:08,1:08,2:08 UTC 3-times.'
+name: 'execute WOTD-update process.'
 
 on:
   schedule:
