@@ -74,7 +74,7 @@ import * as rimraf from 'rimraf'
   await browser.close();
 
   let check = true
-  const gistProps: {name: string, filename: string} = {
+  const gistProps: { [key: string]: string } = {
     name: process.env.gist || "",
     filename: process.env.gist_file_name || ""
   }
