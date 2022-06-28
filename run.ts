@@ -76,7 +76,7 @@ import * as rimraf from 'rimraf'
   let check = true
   const gistProps = {
     name: process.env.gist || "",
-    filename: process.env.gist_file_name
+    filename: process.env.gist_file_name || ""
   }
   for (const key in gistProps) {
     if (Object.prototype.hasOwnProperty.call(gistProps, key)) {
