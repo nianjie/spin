@@ -4,7 +4,7 @@ import { graphql } from "@octokit/graphql"
 import * as playwright from 'playwright'
 import { existsSync } from "fs"
 import { execSync } from "child_process"
-import * as gm from "gm"
+import gm from "gm"
 import { exit } from "process"
 import * as rimraf from 'rimraf'
 
