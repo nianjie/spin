@@ -99,7 +99,7 @@ import * as rimraf from 'rimraf'
   gm("images/*.png")
   .delay(200)
   .resize(378, 100)
-  .write(`${gistProps.name}/${gistProps.filename}`, async function(err){
+  .write(`${gistProps.name}/${gistProps.filename}`, async function(err: Error | null){
     if (err) throw err;
     console.log(`${gistProps.filename} created`)
     execSync(`git add .`, { cwd: gistProps.name })
