@@ -5,7 +5,7 @@ on:
     - cron:  '8 1 * * *'
 
 env:
-  api_address: 'https://oxfordwotd.herokuapp.com/wotd/'
+  api_address: ${{ secrets.WOTD_API_URL }}
 
 jobs:
   take-screenshot:
